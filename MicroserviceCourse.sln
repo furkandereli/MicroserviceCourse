@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceCourse.Catalog.
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{FD13FD46-D0AC-4CCC-A68F-D5ACE8E22F0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceCourse.Shared", "..\MicroserviceCourse.Shared\MicroserviceCourse.Shared.csproj", "{25C62263-AF9C-40DE-9A89-ABB635533A6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,10 @@ Global
 		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25C62263-AF9C-40DE-9A89-ABB635533A6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25C62263-AF9C-40DE-9A89-ABB635533A6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25C62263-AF9C-40DE-9A89-ABB635533A6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25C62263-AF9C-40DE-9A89-ABB635533A6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -35,6 +43,8 @@ Global
 		{3D359895-A0B9-4E1A-87C8-0C2F6BF48B85} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{359079AB-ED40-4A81-9F42-F954047B946A} = {3D359895-A0B9-4E1A-87C8-0C2F6BF48B85}
 		{C54A088A-95A8-4EBE-9FD1-5CC643782F30} = {359079AB-ED40-4A81-9F42-F954047B946A}
+		{FD13FD46-D0AC-4CCC-A68F-D5ACE8E22F0B} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{25C62263-AF9C-40DE-9A89-ABB635533A6E} = {FD13FD46-D0AC-4CCC-A68F-D5ACE8E22F0B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BEB05D97-19D4-4B07-9EE9-46E7C4AA31FD}
