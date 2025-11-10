@@ -11,16 +11,16 @@ public class CreateCategoryCommandHandler(AppDbContext context) : IRequestHandle
 {
     public async Task<ServiceResult<CreateCategoryResponse>> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
     {
-        var existCategory = await context.Categories.AnyAsync(x => x.Name == request.name, cancellationToken);
+        var existCategory = await context.Categories.AnyAsync(x => x.Name == request.Name, cancellationToken);
 
         if (existCategory)
         {
-            return ServiceResult<CreateCategoryResponse>.Error("Category name already exists.", $"Category name '{request.name}' already exists.", HttpStatusCode.BadRequest);
+            return ServiceResult<CreateCategoryResponse>.Error("Category name already exists.", $"Category name '{request.Name}' already exists.", HttpStatusCode.BadRequest);
         }
 
         var category = new Category
         {
-            Name = request.name,
+            Name = request.Name,
             Id = NewId.NextSequentialGuid()
         };
 

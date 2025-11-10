@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MicroserviceCourse.Shared.Extensions;
 
@@ -8,6 +9,7 @@ public static class CommonServiceExt
     {
         services.AddHttpContextAccessor();
         services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining(assembly));
+        services.AddValidatorsFromAssemblyContaining(assembly);
 
         return services;
     }   

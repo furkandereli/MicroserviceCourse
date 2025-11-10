@@ -116,7 +116,7 @@ public class ServiceResult
 public class ServiceResult<T> : ServiceResult
 {
     public T? Data { get; set; }
-    public string? UrlAsCreated { get; set; }
+    [JsonIgnore] public string? UrlAsCreated { get; set; }
 
     public static ServiceResult<T> SuccessAsOk(T data)
     {
