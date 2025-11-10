@@ -10,6 +10,7 @@ public static class CommonServiceExt
         services.AddHttpContextAccessor();
         services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining(assembly));
         services.AddValidatorsFromAssemblyContaining(assembly);
+        services.AddAutoMapper(assembly);
 
         return services;
     }   

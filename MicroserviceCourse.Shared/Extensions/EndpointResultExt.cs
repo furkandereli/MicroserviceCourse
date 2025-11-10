@@ -10,9 +10,9 @@ public static class EndpointResultExt
         return result.StatusCode switch
         {
             HttpStatusCode.OK => Results.Ok(result.Data),
-            HttpStatusCode.Created => Results.Created(result.UrlAsCreated, result),
+            HttpStatusCode.Created => Results.Created(result.UrlAsCreated, result.Data),
             HttpStatusCode.NotFound => Results.NotFound(result.Fail!),
-            _ => Results.Problem(result.Fail!),
+            _ => Results.Problem(result.Fail!)
         };
     }
 
@@ -22,7 +22,7 @@ public static class EndpointResultExt
         {
             HttpStatusCode.NoContent => Results.NoContent(),
             HttpStatusCode.NotFound => Results.NotFound(result.Fail!),
-            _ => Results.Problem(result.Fail!),
+            _ => Results.Problem(result.Fail!)
         };
     }
 }
