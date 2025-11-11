@@ -1,14 +1,6 @@
-﻿using AutoMapper;
-using MediatR;
-using MicroserviceCourse.Catalog.Api.Features.Categories.Dtos;
-using MicroserviceCourse.Catalog.Api.Repositories;
-using MicroserviceCourse.Shared;
-using MicroserviceCourse.Shared.Extensions;
-using Microsoft.EntityFrameworkCore;
+﻿namespace MicroserviceCourse.Catalog.Api.Features.Categories.GetAll;
 
-namespace MicroserviceCourse.Catalog.Api.Features.Categories.GetAll;
-
-public class GetAllCategoryQuery : IRequest<ServiceResult<List<CategoryDto>>>;
+public class GetAllCategoryQuery : IRequestByServiceResult<List<CategoryDto>>;
 
 public class GetAllCategoryQueryHandler(AppDbContext context, IMapper mapper) : IRequestHandler<GetAllCategoryQuery, ServiceResult<List<CategoryDto>>>
 {
@@ -24,7 +16,10 @@ public static class GetAllCategoryEndpoint
 {
     public static RouteGroupBuilder GetAllCategoryGroupItemEndpoint(this RouteGroupBuilder group)
     {
-        group.MapGet("/", async (IMediator mediator) => (await mediator.Send(new GetAllCategoryQuery())).ToGenericResult());
+        group.MapGet("/", async (IMediator mediator) => 
+                    (await mediator.Send(new GetAllCategoryQuery())).ToGenericResult())
+                    .WithName("GetAllCategory");
+       
         return group;
     }
 }

@@ -17,3 +17,17 @@ Content-Type: application/json
 GET {{baseAddress}}/api/categories/{{categoryId}}
 Accept: application/json
 ###
+
+POST {{baseAddress}}/api/courses
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "New Course",
+  "description": "Description of the new course",
+  "price": 49.99,
+  "imageUrl": "http://example.com/course-image.jpg",
+  "userId": "user123",
+  "categoryId": "{{categoryId}}",
+  "duration": 120
+}

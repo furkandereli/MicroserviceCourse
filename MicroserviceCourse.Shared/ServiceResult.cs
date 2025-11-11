@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace MicroserviceCourse.Shared;
+
+public interface IRequestByServiceResult<T> : IRequest<ServiceResult<T>>;
+public interface IRequestByServiceResult : IRequest<ServiceResult>;
 
 public class ServiceResult
 {

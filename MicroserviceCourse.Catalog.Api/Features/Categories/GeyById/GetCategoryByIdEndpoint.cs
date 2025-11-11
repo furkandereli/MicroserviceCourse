@@ -1,14 +1,6 @@
-﻿using AutoMapper;
-using MediatR;
-using MicroserviceCourse.Catalog.Api.Features.Categories.Dtos;
-using MicroserviceCourse.Catalog.Api.Repositories;
-using MicroserviceCourse.Shared;
-using MicroserviceCourse.Shared.Extensions;
-using System.Net;
+﻿namespace MicroserviceCourse.Catalog.Api.Features.Categories.GeyById;
 
-namespace MicroserviceCourse.Catalog.Api.Features.Categories.GeyById;
-
-public record GetCategoryByIdQuery(Guid Id) : IRequest<ServiceResult<CategoryDto>>;
+public record GetCategoryByIdQuery(Guid Id) : IRequestByServiceResult<CategoryDto>;
 
 public class GetCategoryByIdQueryHandler(AppDbContext context, IMapper mapper) : IRequestHandler<GetCategoryByIdQuery, ServiceResult<CategoryDto>>
 {
@@ -28,7 +20,10 @@ public static class GetCategoryByIdEndpoint
 {
     public static RouteGroupBuilder GetByIdCategoryGroupItemEndpoint(this RouteGroupBuilder group)
     {
-        group.MapGet("/{id:guid}", async (IMediator mediator, Guid id) => (await mediator.Send(new GetCategoryByIdQuery(id))).ToGenericResult());
+        group.MapGet("/{id:guid}", async (IMediator mediator, Guid id) => 
+                    (await mediator.Send(new GetCategoryByIdQuery(id))).ToGenericResult())
+                    .WithName("GetByIdCategory");
+        
         return group;
     }
 }
