@@ -1,5 +1,6 @@
 ﻿using MicroserviceCourse.Catalog.Api.Features.Categories.Create;
 using MicroserviceCourse.Catalog.Api.Features.Categories.GetAll;
+using MicroserviceCourse.Catalog.Api.Features.Categories.GeyById;
 
 namespace MicroserviceCourse.Catalog.Api.Features.Categories;
 
@@ -9,6 +10,7 @@ public static class CategoryEndpointExt
     {
         app.MapGroup("api/categories")
             .CreateCategoryGroupItemEndpoint()
-            .GetAllCategoryGroupItemEndpoint();
+            .GetAllCategoryGroupItemEndpoint()
+            .GetByIdCategoryGroupItemEndpoint();
     }
 }

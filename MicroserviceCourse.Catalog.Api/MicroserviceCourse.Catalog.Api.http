@@ -1,4 +1,5 @@
 @baseAddress = http://localhost:5277
+@categoryId = 08de207d-7b91-9e38-80fa-5b4bb1920000
 
 GET {{baseAddress}}/api/categories
 Accept: application/json
@@ -11,4 +12,8 @@ Content-Type: application/json
   "name": "New Category v2",
   "description": "Test desc of the new category"
 }
+###
+
+GET {{baseAddress}}/api/categories/{{categoryId}}
+Accept: application/json
 ###
