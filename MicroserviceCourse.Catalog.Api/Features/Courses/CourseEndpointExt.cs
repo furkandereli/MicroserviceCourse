@@ -1,4 +1,6 @@
 ﻿using MicroserviceCourse.Catalog.Api.Features.Courses.Create;
+using MicroserviceCourse.Catalog.Api.Features.Courses.GetAll;
+using MicroserviceCourse.Catalog.Api.Features.Courses.GetById;
 
 namespace MicroserviceCourse.Catalog.Api.Features.Courses;
 
@@ -8,6 +10,8 @@ public static class CourseEndpointExt
     {
         app.MapGroup("api/courses")
             .WithTags("Courses")
-            .CreateCourseGroupItemEndpoint();
+            .CreateCourseGroupItemEndpoint()
+            .GetAllCoursesGroupItemEndpoint()
+            .GetByIdCourseGroupItemEndpoint();
     }
 }
