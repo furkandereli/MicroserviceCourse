@@ -1,13 +1,13 @@
 @baseAddress = http://localhost:5277
-@categoryId = 08de207d-7b91-9e38-80fa-5b4bb1920000
+@categoryId = 08de23ba-cc92-d083-80fa-5b4bb1920000
 @courseId = 08de216c-b76c-888a-80fa-5b4bb1920000
 @userId = b1920000-5b4b-80fa-a2aa-08de23baccdc
 
-GET {{baseAddress}}/api/categories
+GET {{baseAddress}}/api/v1/categories
 Accept: application/json
 ###
 
-POST {{baseAddress}}/api/categories
+POST {{baseAddress}}/api/v1/categories
 Accept: application/json
 Content-Type: application/json
 {
@@ -16,11 +16,11 @@ Content-Type: application/json
 }
 ###
 
-GET {{baseAddress}}/api/categories/{{categoryId}}
+GET {{baseAddress}}/api/v1/categories/{{categoryId}}
 Accept: application/json
 ###
 
-POST {{baseAddress}}/api/courses
+POST {{baseAddress}}/api/v1/courses
 Accept: application/json
 Content-Type: application/json
 
@@ -35,15 +35,15 @@ Content-Type: application/json
 }
 ###
 
-GET {{baseAddress}}/api/courses
+GET {{baseAddress}}/api/v1/courses
 Accept: application/json
 ###
 
-GET {{baseAddress}}/api/courses/{{courseId}}
+GET {{baseAddress}}/api/v1/courses/{{courseId}}
 Accept: application/json
 ###
 
-PUT {{baseAddress}}/api/courses
+PUT {{baseAddress}}/api/v1/courses
 Accept: application/json
 Content-Type: application/json
 
@@ -59,10 +59,10 @@ Content-Type: application/json
 }
 ###
 
-DELETE {{baseAddress}}/api/courses/{{courseId}}
+DELETE {{baseAddress}}/api/v1/courses/{{courseId}}
 Accept: application/json
 ###
 
-GET {{baseAddress}}/api/courses/user/{{userId}}
+GET {{baseAddress}}/api/v1/courses/user/{{userId}}
 Accept: application/json
 ###
