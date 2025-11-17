@@ -1,12 +1,22 @@
 @baseAddress = http://localhost:5166
+@courseId = 3fa85f64-5717-4562-b3fc-2c963f66afa6
+
+GET {{baseAddress}}/api/v1/baskets/user
+Accept: application/json
+###
 
 POST {{baseAddress}}/api/v1/baskets/item
 Accept: application/json
 Content-Type: application/json
 {
-  "courseId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "courseId": "{{courseId}}",
   "courseName": "Test Course",
   "coursePrice": 10,
   "imageUrl": "test.png"
 }
+###
+
+DELETE {{baseAddress}}/api/v1/baskets/item/{{courseId}}
+Accept: application/json
+Content-Type: application/json
 ###

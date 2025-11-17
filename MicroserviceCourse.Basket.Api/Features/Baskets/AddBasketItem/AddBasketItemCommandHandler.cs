@@ -2,16 +2,17 @@
 using MicroserviceCourse.Basket.Api.Const;
 using MicroserviceCourse.Basket.Api.Dtos;
 using MicroserviceCourse.Shared;
+using MicroserviceCourse.Shared.Service;
 using Microsoft.Extensions.Caching.Distributed;
 using System.Text.Json;
 
 namespace MicroserviceCourse.Basket.Api.Features.Baskets.AddBasketItem;
 
-public class AddBasketItemCommandHandler(IDistributedCache distributedCache) : IRequestHandler<AddBasketItemCommand, ServiceResult>
+public class AddBasketItemCommandHandler(IDistributedCache distributedCache, IIdentityService identityService) : IRequestHandler<AddBasketItemCommand, ServiceResult>
 {
     public async Task<ServiceResult> Handle(AddBasketItemCommand request, CancellationToken cancellationToken)
     {
-        Guid userId = Guid.NewGuid();
+        Guid userId = identityService.GetUserId;
         var cacheKey = string.Format(BasketConst.BasketCacheKey, userId);
 
         var basketAtString = await distributedCache.GetStringAsync(cacheKey, cancellationToken);
@@ -28,12 +29,12 @@ public class AddBasketItemCommandHandler(IDistributedCache distributedCache) : I
 
         currentBasket = JsonSerializer.Deserialize<BasketDto>(basketAtString);
 
-        var existingBasketItem = currentBasket!.BasketItems.FirstOrDefault(x => x.Id == request.CourseId);
+        var existingBasketItem = currentBasket!.Items.FirstOrDefault(x => x.Id == request.CourseId);
 
         if (existingBasketItem is not null)
-            currentBasket.BasketItems.Remove(existingBasketItem);
+            currentBasket.Items.Remove(existingBasketItem);
 
-        currentBasket.BasketItems.Add(newBasketItem);
+        currentBasket.Items.Add(newBasketItem);
         await CreateCache(currentBasket, cacheKey, cancellationToken);
         return ServiceResult.SuccessAsNoContent();
 

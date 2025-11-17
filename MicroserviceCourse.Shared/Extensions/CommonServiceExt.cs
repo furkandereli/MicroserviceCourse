@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using MicroserviceCourse.Shared.Service;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MicroserviceCourse.Shared.Extensions;
@@ -10,6 +11,9 @@ public static class CommonServiceExt
         services.AddHttpContextAccessor();
         services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining(assembly));
         services.AddValidatorsFromAssemblyContaining(assembly);
+
+        services.AddScoped<IIdentityService, IdentityServiceFake>();
+
         services.AddAutoMapper(assembly);
 
         return services;
