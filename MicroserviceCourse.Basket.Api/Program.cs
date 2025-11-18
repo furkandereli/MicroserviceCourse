@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCommonServiceExt(typeof(BasketAssembly));
+builder.Services.AddScoped<BasketService>();
 builder.Services.AddVersioningExt();
 builder.Services.AddStackExchangeRedisCache(options =>
 {
