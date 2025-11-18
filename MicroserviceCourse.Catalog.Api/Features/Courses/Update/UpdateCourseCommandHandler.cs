@@ -1,6 +1,6 @@
 ﻿namespace MicroserviceCourse.Catalog.Api.Features.Courses.Update;
 
-public class UpdateCourseCommandHandler(AppDbContext context, IMapper mapper) : IRequestHandler<UpdateCourseCommand, ServiceResult>
+public class UpdateCourseCommandHandler(AppDbContext context) : IRequestHandler<UpdateCourseCommand, ServiceResult>
 {
     public async Task<ServiceResult> Handle(UpdateCourseCommand request, CancellationToken cancellationToken)
     {

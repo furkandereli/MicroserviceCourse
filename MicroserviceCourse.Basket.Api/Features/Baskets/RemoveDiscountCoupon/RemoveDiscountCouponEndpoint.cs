@@ -1,9 +1,6 @@
 ﻿using MediatR;
-using MicroserviceCourse.Basket.Api.Const;
 using MicroserviceCourse.Shared;
 using MicroserviceCourse.Shared.Extensions;
-using MicroserviceCourse.Shared.Service;
-using Microsoft.Extensions.Caching.Distributed;
 using System.Net;
 using System.Text.Json;
 
@@ -11,7 +8,7 @@ namespace MicroserviceCourse.Basket.Api.Features.Baskets.RemoveDiscountCoupon;
 
 public record RemoveDiscountCouponCommand() : IRequestByServiceResult;
 
-public class RemoveDiscountCouponHandler(IDistributedCache distributedCache, IIdentityService identityService,BasketService basketService) : IRequestHandler<RemoveDiscountCouponCommand, ServiceResult>
+public class RemoveDiscountCouponHandler(BasketService basketService) : IRequestHandler<RemoveDiscountCouponCommand, ServiceResult>
 {
     public async Task<ServiceResult> Handle(RemoveDiscountCouponCommand request, CancellationToken cancellationToken)
     {
