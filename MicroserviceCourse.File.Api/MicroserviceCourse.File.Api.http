@@ -1,0 +1,6 @@
+@baseAddress = http://localhost:5108
+
+GET {{baseAddress}}/weatherforecast/
+Accept: application/json
+
+###
