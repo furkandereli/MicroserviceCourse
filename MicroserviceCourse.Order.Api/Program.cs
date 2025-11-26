@@ -1,11 +1,18 @@
+using MicroserviceCourse.Order.Api.Endpoints.Orders;
 using MicroserviceCourse.Order.Application.Contracts.Repositories;
+using MicroserviceCourse.Order.Application.Contracts.UnitOfWork;
 using MicroserviceCourse.Order.Persistence;
 using MicroserviceCourse.Order.Persistence.Repositories;
+using MicroserviceCourse.Order.Persistence.UnitOfWork;
+using MicroserviceCourse.Shared.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddVersioningExt();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
@@ -13,12 +20,18 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 builder.Services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 var app = builder.Build();
+
+app.AddOrderGroupEndpointExt(app.AddVersionSetExt());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseSwagger();
+    app.UseSwaggerUI();
     app.MapOpenApi();
 }
 
