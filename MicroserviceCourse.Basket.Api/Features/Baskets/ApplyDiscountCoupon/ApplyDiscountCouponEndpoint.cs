@@ -11,7 +11,7 @@ public static class ApplyDiscountCouponEndpoint
         group.MapPut("/applyDiscountCoupon", async (ApplyDiscountCouponCommand command, IMediator mediator) => (await mediator.Send(command)).ToGenericResult())
             .WithName("ApplyDiscount")
             .MapToApiVersion(1, 0)
-            .AddEndpointFilter<ValidationFilter<ApplyDiscountCouponCommandValidator>>();
+            .AddEndpointFilter<ValidationFilter<ApplyDiscountCouponCommand>>();
 
         return group;
     }

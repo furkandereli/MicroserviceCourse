@@ -12,7 +12,7 @@ public static class AddBasketItemEndpoint
                     (await mediator.Send(command)).ToGenericResult())
                     .WithName("AddBasketItem")
                     .MapToApiVersion(1, 0)
-                    .AddEndpointFilter<ValidationFilter<AddBasketItemCommandValidator>>();
+                    .AddEndpointFilter<ValidationFilter<AddBasketItemCommand>>();
 
         return group;
     }

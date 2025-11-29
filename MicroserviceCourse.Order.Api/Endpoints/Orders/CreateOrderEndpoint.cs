@@ -16,7 +16,7 @@ public static class CreateOrderEndpoint
             .Produces(StatusCodes.Status201Created)
             .Produces<ProblemDetails>(StatusCodes.Status400BadRequest)
             .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError)
-            .AddEndpointFilter<ValidationFilter<CreateOrderCommandValidator>>();
+            .AddEndpointFilter<ValidationFilter<CreateOrderCommand>>();
 
         return group;
     }

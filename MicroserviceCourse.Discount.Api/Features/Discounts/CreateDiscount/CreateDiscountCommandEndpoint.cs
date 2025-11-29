@@ -12,7 +12,7 @@ public static class GetDiscountByCodeQueryEndpoint
             .MapToApiVersion(1, 0)
             .Produces<ProblemDetails>(StatusCodes.Status400BadRequest)
             .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError)
-            .AddEndpointFilter<ValidationFilter<CreateDiscountCommandValidator>>();
+            .AddEndpointFilter<ValidationFilter<CreateDiscountCommand>>();
 
         return group;
     }

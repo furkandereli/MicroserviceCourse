@@ -1,5 +1,4 @@
-﻿using MicroserviceCourse.Shared.Filters;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace MicroserviceCourse.Discount.Api.Features.Discounts.GetDiscountByCode;
 

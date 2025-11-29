@@ -10,11 +10,11 @@ public class OrderItem : BaseEntity<int>
 
     public void SetItem(Guid productId, string productName, decimal unitPrice)
     {
-        if (string.IsNullOrEmpty(ProductName))
-            throw new ArgumentNullException(nameof(ProductName), "ProductName cannot be empty.");
+        if (string.IsNullOrEmpty(productName))
+            throw new ArgumentNullException(nameof(productName), "ProductName cannot be empty.");
 
-        if (UnitPrice <= 0)
-            throw new ArgumentNullException(nameof(UnitPrice), "UnitPrice cannot be less than or equal to zero.");
+        if (unitPrice <= 0)
+            throw new ArgumentNullException(nameof(unitPrice), "UnitPrice cannot be less than or equal to zero.");
 
         this.ProductId = productId;
         this.ProductName = productName;

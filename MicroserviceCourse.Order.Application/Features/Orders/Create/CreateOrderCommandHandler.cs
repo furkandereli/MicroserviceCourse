@@ -15,7 +15,7 @@ public class CreateOrderCommandHandler(IOrderRepository orderRepository,
 {
     public async Task<ServiceResult> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
-        if (request.Items.Any())
+        if (!request.Items.Any())
             return ServiceResult.Error("Order items not found.", "Order must have atleast one item.", HttpStatusCode.BadRequest);
 
         var newAddress = new Address
