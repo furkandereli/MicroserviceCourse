@@ -45,6 +45,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceCourse.Order.Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceCourse.Order.Persistence", "MicroserviceCourse.Order.Persistence\MicroserviceCourse.Order.Persistence.csproj", "{D996508B-5C87-4C50-A12B-D499296383B8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "payment", "payment", "{64AF4FF2-F231-499A-ADC9-DCEF1197A599}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceCourse.Payment.Api", "MicroserviceCourse.Payment.Api\MicroserviceCourse.Payment.Api.csproj", "{72001774-2179-400C-9B61-D4D9EBDB0CD7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +95,10 @@ Global
 		{D996508B-5C87-4C50-A12B-D499296383B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D996508B-5C87-4C50-A12B-D499296383B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D996508B-5C87-4C50-A12B-D499296383B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72001774-2179-400C-9B61-D4D9EBDB0CD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72001774-2179-400C-9B61-D4D9EBDB0CD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72001774-2179-400C-9B61-D4D9EBDB0CD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72001774-2179-400C-9B61-D4D9EBDB0CD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,6 +123,8 @@ Global
 		{6706C729-8484-4A7A-B3CA-9B432C84A575} = {E382ACCD-0867-4285-A58F-B1E718D6D056}
 		{016B81A4-BBA3-491C-B30F-D5F729CDEF4B} = {E382ACCD-0867-4285-A58F-B1E718D6D056}
 		{D996508B-5C87-4C50-A12B-D499296383B8} = {D64374B3-AF4C-4F54-90B5-18A124B84213}
+		{64AF4FF2-F231-499A-ADC9-DCEF1197A599} = {3D359895-A0B9-4E1A-87C8-0C2F6BF48B85}
+		{72001774-2179-400C-9B61-D4D9EBDB0CD7} = {64AF4FF2-F231-499A-ADC9-DCEF1197A599}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BEB05D97-19D4-4B07-9EE9-46E7C4AA31FD}
