@@ -49,6 +49,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "payment", "payment", "{64AF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceCourse.Payment.Api", "MicroserviceCourse.Payment.Api\MicroserviceCourse.Payment.Api.csproj", "{72001774-2179-400C-9B61-D4D9EBDB0CD7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gateway", "gateway", "{893F1C94-D24A-408C-A0DF-6C4DA3F05B04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceCourse.Gateway", "MicroserviceCourse.Gateway\MicroserviceCourse.Gateway.csproj", "{53718CC5-6F6D-410C-94EE-19C97E1457D9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +103,10 @@ Global
 		{72001774-2179-400C-9B61-D4D9EBDB0CD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72001774-2179-400C-9B61-D4D9EBDB0CD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72001774-2179-400C-9B61-D4D9EBDB0CD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53718CC5-6F6D-410C-94EE-19C97E1457D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53718CC5-6F6D-410C-94EE-19C97E1457D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53718CC5-6F6D-410C-94EE-19C97E1457D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53718CC5-6F6D-410C-94EE-19C97E1457D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -125,6 +133,8 @@ Global
 		{D996508B-5C87-4C50-A12B-D499296383B8} = {D64374B3-AF4C-4F54-90B5-18A124B84213}
 		{64AF4FF2-F231-499A-ADC9-DCEF1197A599} = {3D359895-A0B9-4E1A-87C8-0C2F6BF48B85}
 		{72001774-2179-400C-9B61-D4D9EBDB0CD7} = {64AF4FF2-F231-499A-ADC9-DCEF1197A599}
+		{893F1C94-D24A-408C-A0DF-6C4DA3F05B04} = {3D359895-A0B9-4E1A-87C8-0C2F6BF48B85}
+		{53718CC5-6F6D-410C-94EE-19C97E1457D9} = {893F1C94-D24A-408C-A0DF-6C4DA3F05B04}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BEB05D97-19D4-4B07-9EE9-46E7C4AA31FD}
