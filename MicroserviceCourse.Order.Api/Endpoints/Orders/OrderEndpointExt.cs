@@ -10,6 +10,7 @@ public static class OrderEndpointExt
             .WithTags("Orders")
             .WithApiVersionSet(apiVersionSet)
             .CreateOrderGroupItemEndpoint()
-            .GetOrdersGroupItemEndpoint();
+            .GetOrdersGroupItemEndpoint()
+            .RequireAuthorization();
     }
 }

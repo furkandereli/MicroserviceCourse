@@ -20,6 +20,7 @@ public static class CourseEndpointExt
             .GetByIdCourseGroupItemEndpoint()
             .UpdateCourseGroupItemEndpoint()
             .DeleteCourseGroupItemEndpoint()
-            .GetAllByUserIdGroupItemEndpoint();
+            .GetAllByUserIdGroupItemEndpoint()
+            .RequireAuthorization();
     }
 }

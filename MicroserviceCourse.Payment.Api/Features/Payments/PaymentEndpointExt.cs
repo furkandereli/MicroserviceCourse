@@ -13,6 +13,7 @@ public static class PaymentEndpointExt
             .WithTags("payments")
             .WithApiVersionSet(apiVersionSet)
             .CreatePaymentGroupItemEndpoint()
-            .GetAllPaymentsByUserIdGroupItemEndpoint();
+            .GetAllPaymentsByUserIdGroupItemEndpoint()
+            .RequireAuthorization();
     }
 }

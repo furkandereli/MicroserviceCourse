@@ -12,6 +12,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddVersioningExt();
 builder.Services.AddCommonServiceExt(typeof(PaymentAssembly));
 
+builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
+
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseInMemoryDatabase("payment-in-memory-db");
@@ -27,5 +29,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     app.MapOpenApi();
 }
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.Run();

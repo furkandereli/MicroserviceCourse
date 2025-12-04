@@ -16,6 +16,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddVersioningExt();
 builder.Services.AddCommonServiceExt(typeof(OrderApplicationAssembly));
 
+builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
+
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
@@ -36,5 +38,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     app.MapOpenApi();
 }
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.Run();
