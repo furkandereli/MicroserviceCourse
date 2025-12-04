@@ -15,7 +15,8 @@ public static class GetAllPaymentsByUserIdQueryEndpoint
            .Produces(StatusCodes.Status204NoContent)
            .Produces<ProblemDetails>(StatusCodes.Status400BadRequest)
            .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError)
-           .AddEndpointFilter<ValidationFilter<CreatePaymentCommand>>();
+           .AddEndpointFilter<ValidationFilter<CreatePaymentCommand>>()
+           .RequireAuthorization("Password");
 
         return group;
     }

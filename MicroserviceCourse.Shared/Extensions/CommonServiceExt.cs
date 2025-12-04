@@ -12,7 +12,7 @@ public static class CommonServiceExt
         services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining(assembly));
         services.AddValidatorsFromAssemblyContaining(assembly);
 
-        services.AddScoped<IIdentityService, IdentityServiceFake>();
+        services.AddScoped<IIdentityService, IdentityService>();
 
         services.AddAutoMapper(assembly);
 

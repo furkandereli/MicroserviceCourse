@@ -10,12 +10,16 @@ public class CreatePaymentCommandHandler(AppDbContext context, IIdentityService 
 {
     public async Task<ServiceResult<Guid>> Handle(CreatePaymentCommand request, CancellationToken cancellationToken)
     {
+        var userId = identityService.UserId;
+        //var userName = identityService.UserName;
+        //var userRoles = identityService.Roles;
+
         var (isSuccess, errorMessage) = await ExternalPaymentProcessAsync(request.CardNumber, request.CardHolderName, request.CardExpirationDate, request.CardSecurityNumber, request.Amount);
 
         if (!isSuccess)      
             return ServiceResult<Guid>.Error("Payment failed", errorMessage!, HttpStatusCode.BadRequest);
 
-        var newPayment = new Repositories.Payment(identityService.GetUserId, request.OrderCode, request.Amount);
+        var newPayment = new Repositories.Payment(userId, request.OrderCode, request.Amount);
         newPayment.SetStatus(PaymentStatus.Success);
 
         context.Payments.Add(newPayment);

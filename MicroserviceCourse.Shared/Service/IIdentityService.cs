@@ -2,6 +2,7 @@
 
 public interface IIdentityService
 {
-    public Guid GetUserId { get; }
+    public Guid UserId { get; }
     public string UserName { get; }
+    public List<string> Roles => [];
 }
