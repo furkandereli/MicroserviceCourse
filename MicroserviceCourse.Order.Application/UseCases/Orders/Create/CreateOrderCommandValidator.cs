@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace MicroserviceCourse.Order.Application.Features.Orders.Create;
+namespace MicroserviceCourse.Order.Application.UseCases.Orders.Create;
 
 public class CreateOrderCommandValidator : AbstractValidator<CreateOrderCommand>
 {

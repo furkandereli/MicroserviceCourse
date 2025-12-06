@@ -1,3 +1,4 @@
+using MicroserviceCourse.Bus;
 using MicroserviceCourse.Catalog.Api;
 using MicroserviceCourse.Catalog.Api.Features.Categories;
 using MicroserviceCourse.Catalog.Api.Features.Courses;
@@ -10,6 +11,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddOptionsExt();
 builder.Services.AddDatabaseServiceExt();
 builder.Services.AddCommonServiceExt(typeof(CatalogAssembly));
+builder.Services.AddMasstransitExt(builder.Configuration);
 builder.Services.AddVersioningExt();
 
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);

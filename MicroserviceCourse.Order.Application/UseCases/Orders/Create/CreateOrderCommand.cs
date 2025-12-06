@@ -1,6 +1,6 @@
 ﻿using MicroserviceCourse.Shared;
 
-namespace MicroserviceCourse.Order.Application.Features.Orders.Create;
+namespace MicroserviceCourse.Order.Application.UseCases.Orders.Create;
 
 public record CreateOrderCommand(float? DiscountRate, AddressDto Address, PaymentDto Payment, List<OrderItemDto> Items) : IRequestByServiceResult;
 

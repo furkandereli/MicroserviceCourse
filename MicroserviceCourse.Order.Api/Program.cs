@@ -1,3 +1,4 @@
+using MicroserviceCourse.Bus;
 using MicroserviceCourse.Order.Api.Endpoints.Orders;
 using MicroserviceCourse.Order.Application;
 using MicroserviceCourse.Order.Application.Contracts.Repositories;
@@ -15,7 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddVersioningExt();
 builder.Services.AddCommonServiceExt(typeof(OrderApplicationAssembly));
-
+builder.Services.AddMasstransitExt(builder.Configuration);
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
 
 builder.Services.AddDbContext<AppDbContext>(options =>

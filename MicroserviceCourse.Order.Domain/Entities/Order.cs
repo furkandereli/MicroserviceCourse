@@ -1,5 +1,4 @@
-﻿using MassTransit;
-using System.Text;
+﻿using System.Text;
 
 namespace MicroserviceCourse.Order.Domain.Entities;
 
@@ -33,7 +32,7 @@ public class Order : BaseEntity<Guid>
     {
         return new Order()
         {
-            Id = NewId.NextGuid(),
+            Id = Guid.CreateVersion7(),
             Code = GenerateCode(),
             BuyerId = buyerId,
             Created = DateTime.Now,
@@ -48,7 +47,7 @@ public class Order : BaseEntity<Guid>
     {
         return new Order()
         {
-            Id = NewId.NextGuid(),
+            Id = Guid.CreateVersion7(),
             Code = GenerateCode(),
             BuyerId = buyerId,
             Created = DateTime.Now,

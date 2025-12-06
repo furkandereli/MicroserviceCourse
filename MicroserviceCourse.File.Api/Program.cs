@@ -1,3 +1,4 @@
+using MicroserviceCourse.Bus;
 using MicroserviceCourse.File.Api;
 using MicroserviceCourse.File.Api.Features.File;
 using MicroserviceCourse.Shared.Extensions;
@@ -10,6 +11,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
 
 builder.Services.AddCommonServiceExt(typeof(FileAssembly));
+builder.Services.AddMasstransitExt(builder.Configuration);
 builder.Services.AddVersioningExt();
 
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);

@@ -17,7 +17,7 @@ public class AddBasketItemCommandHandler(IIdentityService identityService, Baske
 
         if (string.IsNullOrEmpty(basketAsJson))
         {
-            currentBasket = new Data.Basket(identityService.GetUserId, [newBasketItem]);
+            currentBasket = new Data.Basket(identityService.UserId, [newBasketItem]);
             await basketService.CreateBasketCacheAsync(currentBasket, cancellationToken);
             return ServiceResult.SuccessAsNoContent();
         }

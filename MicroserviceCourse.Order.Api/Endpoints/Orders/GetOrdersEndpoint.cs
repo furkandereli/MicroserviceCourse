@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using MicroserviceCourse.Order.Application.Features.Orders.GetOrders;
+using MicroserviceCourse.Order.Application.UseCases.Orders.GetOrders;
 using MicroserviceCourse.Shared;
 using MicroserviceCourse.Shared.Extensions;
 using Microsoft.AspNetCore.Mvc;

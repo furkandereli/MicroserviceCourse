@@ -1,3 +1,4 @@
+using MicroserviceCourse.Bus;
 using MicroserviceCourse.Discount.Api;
 using MicroserviceCourse.Discount.Api.Features.Discounts;
 using MicroserviceCourse.Discount.Api.Options;
@@ -10,6 +11,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddOptionsExt();
 builder.Services.AddDatabaseServiceExt();
 builder.Services.AddCommonServiceExt(typeof(DiscountAssembly));
+builder.Services.AddMasstransitExt(builder.Configuration);
 builder.Services.AddVersioningExt();
 
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);

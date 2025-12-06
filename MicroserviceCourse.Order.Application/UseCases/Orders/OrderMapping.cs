@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using MicroserviceCourse.Order.Application.Features.Orders.Create;
+using MicroserviceCourse.Order.Application.UseCases.Orders.Create;
 using MicroserviceCourse.Order.Domain.Entities;
 
-namespace MicroserviceCourse.Order.Application.Features.Orders;
+namespace MicroserviceCourse.Order.Application.UseCases.Orders;
 
 public class OrderMapping : Profile
 {

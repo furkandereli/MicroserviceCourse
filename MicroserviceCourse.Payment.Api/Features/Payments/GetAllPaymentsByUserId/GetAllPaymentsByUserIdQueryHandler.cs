@@ -10,7 +10,7 @@ namespace MicroserviceCourse.Payment.Api.Features.Payments.GetAllPaymentsByUserI
     {
         public async Task<ServiceResult<List<GetAllPaymentsByUserIdResponse>>> Handle(GetAllPaymentsByUserIdQuery request, CancellationToken cancellationToken)
         {
-            var userId = identityService.GetUserId;
+            var userId = identityService.UserId;
             var payments = await context.Payments.Where(x => x.UserId == userId)
                 .Select(x => new GetAllPaymentsByUserIdResponse(x.Id, x.OrderCode, x.Amount.ToString("C"), x.Created, x.Status))
                 .ToListAsync();
