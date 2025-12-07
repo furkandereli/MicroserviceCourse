@@ -1,8 +1,9 @@
 ﻿namespace MicroserviceCourse.Catalog.Api.Features.Courses.Create;
 
-public record CreateCourseCommand(string Name,
+public record CreateCourseCommand(
+    string Name,
     string Description,
     decimal Price,
-    string? ImageUrl,
+    IFormFile? Picture,
     Guid CategoryId) : IRequestByServiceResult<Guid>;
 

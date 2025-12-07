@@ -16,7 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddVersioningExt();
 builder.Services.AddCommonServiceExt(typeof(OrderApplicationAssembly));
-builder.Services.AddMasstransitExt(builder.Configuration);
+builder.Services.AddCommonMasstransitExt(builder.Configuration);
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
 
 builder.Services.AddDbContext<AppDbContext>(options =>

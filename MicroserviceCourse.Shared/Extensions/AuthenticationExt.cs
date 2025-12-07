@@ -13,7 +13,11 @@ public static class AuthenticationExt
     {
         var identityOptions = configuration.GetSection(nameof(IdentityOption)).Get<IdentityOption>();
 
-        services.AddAuthentication().AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+        services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
         {
             options.Authority = identityOptions.Address;
             options.Audience = identityOptions.Audience;

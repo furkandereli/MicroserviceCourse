@@ -1,6 +1,8 @@
-﻿namespace MicroserviceCourse.Catalog.Api.Features.Courses.Create;
+﻿using MicroserviceCourse.Bus.Commands;
 
-public class CreateCourseCommandHandler(AppDbContext context, IMapper mapper) : IRequestHandler<CreateCourseCommand, ServiceResult<Guid>>
+namespace MicroserviceCourse.Catalog.Api.Features.Courses.Create;
+
+public class CreateCourseCommandHandler(AppDbContext context, IMapper mapper, IPublishEndpoint publishEndpoint) : IRequestHandler<CreateCourseCommand, ServiceResult<Guid>>
 {
     public async Task<ServiceResult<Guid>> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
     {
@@ -11,7 +13,7 @@ public class CreateCourseCommandHandler(AppDbContext context, IMapper mapper) : 
 
         var hasCourse = await context.Courses.AnyAsync(c => c.Name == request.Name, cancellationToken);
 
-        if(hasCourse)
+        if (hasCourse)
             return ServiceResult<Guid>.Error("Course already exists.", $"Course with name {request.Name} already exists.", HttpStatusCode.BadRequest);
 
         var newCourse = mapper.Map<Course>(request);
@@ -27,6 +29,17 @@ public class CreateCourseCommandHandler(AppDbContext context, IMapper mapper) : 
 
         context.Courses.Add(newCourse);
         await context.SaveChangesAsync(cancellationToken);
+
+        if (request.Picture is not null)
+        {
+            using var memoryStream = new MemoryStream();
+            await request.Picture.CopyToAsync(memoryStream, cancellationToken);
+
+            var pictureAsByteArray = memoryStream.ToArray();
+            UploadCoursePictureCommand uploadCoursePictureCommand = new UploadCoursePictureCommand(newCourse.Id, pictureAsByteArray, request.Picture.FileName);
+
+            await publishEndpoint.Publish(uploadCoursePictureCommand, cancellationToken);
+        }
 
         return ServiceResult<Guid>.SuccessAsCreated(newCourse.Id, $"/api/courses/{newCourse.Id}");
     }

@@ -12,7 +12,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddVersioningExt();
 builder.Services.AddCommonServiceExt(typeof(PaymentAssembly));
-builder.Services.AddMasstransitExt(builder.Configuration);
+builder.Services.AddCommonMasstransitExt(builder.Configuration);
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
