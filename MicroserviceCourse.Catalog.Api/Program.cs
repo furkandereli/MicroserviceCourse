@@ -1,4 +1,3 @@
-using MicroserviceCourse.Bus;
 using MicroserviceCourse.Catalog.Api;
 using MicroserviceCourse.Catalog.Api.Features.Categories;
 using MicroserviceCourse.Catalog.Api.Features.Courses;

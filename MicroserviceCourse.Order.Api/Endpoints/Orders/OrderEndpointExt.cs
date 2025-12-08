@@ -11,6 +11,6 @@ public static class OrderEndpointExt
             .WithApiVersionSet(apiVersionSet)
             .CreateOrderGroupItemEndpoint()
             .GetOrdersGroupItemEndpoint()
-            .RequireAuthorization();
+            .RequireAuthorization("Password");
     }
 }

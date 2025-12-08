@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCommonServiceExt(typeof(BasketAssembly));
-builder.Services.AddCommonMasstransitExt(builder.Configuration);
+builder.Services.AddMasstransitExt(builder.Configuration);
 builder.Services.AddScoped<BasketService>();
 builder.Services.AddVersioningExt();
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);

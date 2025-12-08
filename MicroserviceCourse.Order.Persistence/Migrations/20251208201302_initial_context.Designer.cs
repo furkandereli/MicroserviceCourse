@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MicroserviceCourse.Order.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251124223903_initial")]
-    partial class initial
+    [Migration("20251208201302_initial_context")]
+    partial class initial_context
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

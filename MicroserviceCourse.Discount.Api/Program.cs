@@ -11,7 +11,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddOptionsExt();
 builder.Services.AddDatabaseServiceExt();
 builder.Services.AddCommonServiceExt(typeof(DiscountAssembly));
-builder.Services.AddCommonMasstransitExt(builder.Configuration);
+builder.Services.AddMasstransitExt(builder.Configuration);
 builder.Services.AddVersioningExt();
 
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
