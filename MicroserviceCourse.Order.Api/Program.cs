@@ -1,6 +1,7 @@
 using MicroserviceCourse.Bus;
 using MicroserviceCourse.Order.Api.Endpoints.Orders;
 using MicroserviceCourse.Order.Application;
+using MicroserviceCourse.Order.Application.Contracts.Refit;
 using MicroserviceCourse.Order.Application.Contracts.Repositories;
 using MicroserviceCourse.Order.Application.Contracts.UnitOfWork;
 using MicroserviceCourse.Order.Persistence;
@@ -18,7 +19,7 @@ builder.Services.AddVersioningExt();
 builder.Services.AddCommonServiceExt(typeof(OrderApplicationAssembly));
 builder.Services.AddCommonMasstransitExt(builder.Configuration);
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
-
+builder.Services.AddRefitConfigurationExt(builder.Configuration);
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
