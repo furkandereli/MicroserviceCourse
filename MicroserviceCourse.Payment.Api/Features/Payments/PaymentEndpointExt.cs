@@ -1,6 +1,7 @@
 ﻿using Asp.Versioning.Builder;
 using MicroserviceCourse.Payment.Api.Features.Payments.Create;
 using MicroserviceCourse.Payment.Api.Features.Payments.GetAllPaymentsByUserId;
+using MicroserviceCourse.Payment.Api.Features.Payments.GetStatus;
 
 namespace MicroserviceCourse.Payment.Api.Features.Payments;
 
@@ -13,6 +14,7 @@ public static class PaymentEndpointExt
             .WithTags("payments")
             .WithApiVersionSet(apiVersionSet)
             .CreatePaymentGroupItemEndpoint()
-            .GetAllPaymentsByUserIdGroupItemEndpoint();
+            .GetAllPaymentsByUserIdGroupItemEndpoint()
+            .GetPaymentStatusGroupItemEndpoint();
     }
 }

@@ -1,6 +1,7 @@
 @baseAddress = http://localhost:5231
 @clientCredentialToken = your_client_credential_token
 @passwordToken = your_password_token
+@orderCode = 0284842859
 
 POST {{baseAddress}}/api/v1/payments
 Content-Type: application/json
@@ -20,3 +21,7 @@ GET {{baseAddress}}/api/v1/payments
 Accept: application/json
 Authorization: Bearer {{clientCredentialToken}}
 ###
+
+GET {{baseAddress}}/api/v1/payments/status/{{orderCode}}
+Accept: application/json
+Authorization: Bearer {{clientCredentialToken}}

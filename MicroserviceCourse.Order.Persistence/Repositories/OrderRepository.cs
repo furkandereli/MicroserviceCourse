@@ -1,4 +1,5 @@
 ﻿using MicroserviceCourse.Order.Application.Contracts.Repositories;
+using MicroserviceCourse.Order.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace MicroserviceCourse.Order.Persistence.Repositories;
@@ -12,5 +13,14 @@ public class OrderRepository(AppDbContext context) : GenericRepository<Guid, Dom
                              .OrderByDescending(x => x.Created)
                              .ToListAsync();
                              
+    }
+
+    public async Task SetStatus(string orderCode, Guid paymentId, OrderStatus status)
+    {
+        var order = await context.Orders.FirstAsync(x => x.Code == orderCode);
+
+        order.Status = status;
+        order.PaymentId = paymentId;
+        context.Update(order);
     }
 }
