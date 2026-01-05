@@ -55,6 +55,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceCourse.Gateway"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceCourse.Bus", "MicroserviceCourse.Bus\MicroserviceCourse.Bus.csproj", "{1482B639-01F3-4D4B-B724-C93673D1080E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ui", "ui", "{680408ED-95BC-41A4-AC7F-4D53190C10C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceCourse.Web", "MicroserviceCourse.Web\MicroserviceCourse.Web.csproj", "{9C17BAD2-3C97-475E-9B96-2CDFB9D7EE6B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +117,10 @@ Global
 		{1482B639-01F3-4D4B-B724-C93673D1080E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1482B639-01F3-4D4B-B724-C93673D1080E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1482B639-01F3-4D4B-B724-C93673D1080E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C17BAD2-3C97-475E-9B96-2CDFB9D7EE6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C17BAD2-3C97-475E-9B96-2CDFB9D7EE6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C17BAD2-3C97-475E-9B96-2CDFB9D7EE6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C17BAD2-3C97-475E-9B96-2CDFB9D7EE6B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -142,6 +150,8 @@ Global
 		{893F1C94-D24A-408C-A0DF-6C4DA3F05B04} = {3D359895-A0B9-4E1A-87C8-0C2F6BF48B85}
 		{53718CC5-6F6D-410C-94EE-19C97E1457D9} = {893F1C94-D24A-408C-A0DF-6C4DA3F05B04}
 		{1482B639-01F3-4D4B-B724-C93673D1080E} = {FD13FD46-D0AC-4CCC-A68F-D5ACE8E22F0B}
+		{680408ED-95BC-41A4-AC7F-4D53190C10C8} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{9C17BAD2-3C97-475E-9B96-2CDFB9D7EE6B} = {680408ED-95BC-41A4-AC7F-4D53190C10C8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BEB05D97-19D4-4B07-9EE9-46E7C4AA31FD}
