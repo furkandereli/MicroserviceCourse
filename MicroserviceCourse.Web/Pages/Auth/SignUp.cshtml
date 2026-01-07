@@ -9,6 +9,7 @@
 
         <div asp-validation-summary="ModelOnly">
         </div>
+
         <form method="post">
             <div class="mb-3">
                 <label asp-for="SignUpViewModel.UserName" class="form-label"></label>
@@ -59,3 +60,7 @@
 
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

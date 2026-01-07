@@ -1,10 +1,15 @@
 using MicroserviceCourse.Web.Extensions;
+using MicroserviceCourse.Web.Pages.Auth.SignUp;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddMvc(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
 builder.Services.AddOptionsExt();
+
+builder.Services.AddHttpClient<SignUpService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
