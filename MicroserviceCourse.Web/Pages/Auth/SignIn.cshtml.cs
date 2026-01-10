@@ -16,7 +16,7 @@ public class SignInModel(SignInService signInService) : PageModel
         if (!ModelState.IsValid)
             return Page();
 
-        var result = await signInService.SignInAsync(SignInViewModel);
+        var result = await signInService.AuthenticateAsync(SignInViewModel);
 
         if (result.IsFail)
         {

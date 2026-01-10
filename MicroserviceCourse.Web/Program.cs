@@ -1,6 +1,8 @@
 using MicroserviceCourse.Web.Extensions;
 using MicroserviceCourse.Web.Pages.Auth.SignIn;
 using MicroserviceCourse.Web.Pages.Auth.SignUp;
+using MicroserviceCourse.Web.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,22 @@ builder.Services.AddOptionsExt();
 
 builder.Services.AddHttpClient<SignUpService>();
 builder.Services.AddHttpClient<SignInService>();
+builder.Services.AddSingleton<TokenService>();
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddAuthentication(configureOptions =>
+{
+    configureOptions.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    configureOptions.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+})
+    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+    {
+        options.LoginPath = "/Auth/SignIn";
+        options.ExpireTimeSpan = TimeSpan.FromDays(60);
+        options.Cookie.Name = "MicroserviceCourseCookie";
+        options.AccessDeniedPath = "/Auth/AccessDenied";
+    });
+
 
 var app = builder.Build();
 

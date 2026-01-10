@@ -1,12 +1,15 @@
 ﻿using Duende.IdentityModel.Client;
 using MicroserviceCourse.Web.Options;
 using MicroserviceCourse.Web.Services;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
 
 namespace MicroserviceCourse.Web.Pages.Auth.SignIn;
 
-public class SignInService(IdentityOption identityOption, HttpClient client, ILogger<SignInService> logger)
+public class SignInService(IHttpContextAccessor contextAccessor,IdentityOption identityOption, HttpClient client, TokenService tokenService)
 {
-    public async Task<ServiceResult> SignInAsync(SignInViewModel signInViewModel)
+    public async Task<ServiceResult> AuthenticateAsync(SignInViewModel signInViewModel)
     {
         var tokenResponse = await GetAccessToken(signInViewModel);
 
@@ -14,6 +17,15 @@ public class SignInService(IdentityOption identityOption, HttpClient client, ILo
         {
             return ServiceResult.Error(tokenResponse.Error!, tokenResponse.ErrorDescription!);
         }
+
+        var userClaims = tokenService.ExtractClaims(tokenResponse.AccessToken!);
+
+        var authenticationProperties = tokenService.CreateAuthenticationProperties(tokenResponse);
+
+        var claimIdentity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme, ClaimTypes.Name, ClaimTypes.Role);
+        var claimsPrincipal = new ClaimsPrincipal(claimIdentity);
+
+        await contextAccessor.HttpContext!.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal, authenticationProperties);
 
         return ServiceResult.Success();
     }
@@ -36,8 +48,8 @@ public class SignInService(IdentityOption identityOption, HttpClient client, ILo
             new PasswordTokenRequest
             {
                 Address = discoveryResponse.TokenEndpoint,
-                ClientId = identityOption.Admin.ClientId,
-                ClientSecret = identityOption.Admin.ClientSecret,
+                ClientId = identityOption.Web.ClientId,
+                ClientSecret = identityOption.Web.ClientSecret,
                 UserName = signInViewModel.Email,
                 Password = signInViewModel.Password
             });
