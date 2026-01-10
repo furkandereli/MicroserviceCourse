@@ -1,4 +1,5 @@
 using MicroserviceCourse.Web.Extensions;
+using MicroserviceCourse.Web.Pages.Auth.SignIn;
 using MicroserviceCourse.Web.Pages.Auth.SignUp;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,7 @@ builder.Services.AddMvc(options => options.SuppressImplicitRequiredAttributeForN
 builder.Services.AddOptionsExt();
 
 builder.Services.AddHttpClient<SignUpService>();
+builder.Services.AddHttpClient<SignInService>();
 
 var app = builder.Build();
 

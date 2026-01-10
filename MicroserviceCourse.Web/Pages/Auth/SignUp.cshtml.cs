@@ -2,38 +2,37 @@ using MicroserviceCourse.Web.Pages.Auth.SignUp;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MicroserviceCourse.Web.Pages.Auth
+namespace MicroserviceCourse.Web.Pages.Auth;
+
+public class SignUpModel(SignUpService signUpService) : PageModel
 {
-    public class SignUpModel(SignUpService signUpService) : PageModel
+    [BindProperty] public required SignUpViewModel SignUpViewModel { get; set; } = SignUpViewModel.Empty;
+
+    public void OnGet()
     {
-        [BindProperty] public required SignUpViewModel SignUpViewModel { get; set; } = SignUpViewModel.Empty;
+    }
 
-        public void OnGet()
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (!ModelState.IsValid)
         {
+            return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        var result = await signUpService.CreateAccount(SignUpViewModel);
+
+        if (result.IsFail)
         {
-            if (!ModelState.IsValid)
+            ModelState.AddModelError(string.Empty, result.Fail.Title);
+
+            if (!string.IsNullOrEmpty(result.Fail.Detail))
             {
-                return Page();
+                ModelState.AddModelError(string.Empty, result.Fail.Detail);
             }
 
-            var result = await signUpService.CreateAccount(SignUpViewModel);
-
-            if (result.IsFail)
-            {
-                ModelState.AddModelError(string.Empty, result.Fail.Title);
-
-                if (!string.IsNullOrEmpty(result.Fail.Detail))
-                {
-                    ModelState.AddModelError(string.Empty, result.Fail.Detail);
-                }
-
-                return Page();
-            }
-
-            return RedirectToPage("/Index");
+            return Page();
         }
+
+        return RedirectToPage("/Index");
     }
 }
