@@ -1,8 +1,12 @@
+using MicroserviceCourse.Web.DelegateHandlers;
 using MicroserviceCourse.Web.Extensions;
+using MicroserviceCourse.Web.Options;
 using MicroserviceCourse.Web.Pages.Auth.SignIn;
 using MicroserviceCourse.Web.Pages.Auth.SignUp;
 using MicroserviceCourse.Web.Services;
+using MicroserviceCourse.Web.Services.Refit;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Refit;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,8 +17,15 @@ builder.Services.AddOptionsExt();
 
 builder.Services.AddHttpClient<SignUpService>();
 builder.Services.AddHttpClient<SignInService>();
-builder.Services.AddSingleton<TokenService>();
+builder.Services.AddHttpClient<TokenService>();
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddRefitClient<ICatalogRefitService>().ConfigureHttpClient(configure =>
+{
+    var addressUrlOption = builder.Configuration.GetSection(nameof(GatewayOption)).Get<GatewayOption>();
+    configure.BaseAddress = new Uri(addressUrlOption!.BaseAddress);
+}).AddHttpMessageHandler<AuthenticatedHttpClientHandler>()
+  .AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
 
 builder.Services.AddAuthentication(configureOptions =>
 {

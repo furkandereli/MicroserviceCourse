@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -25,6 +27,12 @@ public class SignInModel(SignInService signInService) : PageModel
             return Page();
         }
 
+        return RedirectToPage("/Index");
+    }
+
+    public async Task<IActionResult> OnGetSignOutAsync()
+    {
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         return RedirectToPage("/Index");
     }
 }
