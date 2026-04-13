@@ -5,6 +5,9 @@ namespace MicroserviceCourse.Web.Services.Refit;
 
 public interface ICatalogRefitService
 {
+    [Get("/v1/catalog/categories")]
+    Task<ApiResponse<ServiceResult<List<CategoryDto>>>> GetCategoriesAsync();
+
     [Post("/v1/catalog/courses")]
     Task<ApiResponse<ServiceResult>> CreateCourseAsync(CreateCourseRequest request);
 
@@ -13,4 +16,5 @@ public interface ICatalogRefitService
 
     [Delete("/v1/catalog/courses/{id}")]
     Task<ApiResponse<ServiceResult>> DeleteCourseAsync(Guid id);
+
 }
