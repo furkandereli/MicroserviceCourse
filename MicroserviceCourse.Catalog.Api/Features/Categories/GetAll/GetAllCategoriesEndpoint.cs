@@ -16,10 +16,11 @@ public static class GetAllCategoriesEndpoint
 {
     public static RouteGroupBuilder GetAllCategoriesGroupItemEndpoint(this RouteGroupBuilder group)
     {
-        group.MapGet("/", async (IMediator mediator) => 
+        group.MapGet("/", async (IMediator mediator) =>
                     (await mediator.Send(new GetAllCategoriesQuery())).ToGenericResult())
                     .MapToApiVersion(1, 0)
-                    .WithName("GetAllCategory");
+                    .WithName("GetAllCategory")
+                    .RequireAuthorization("ClientCredential");
        
         return group;
     }

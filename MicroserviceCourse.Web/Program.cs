@@ -21,12 +21,16 @@ builder.Services.AddHttpClient<TokenService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<CatalogService>();
 
+
 builder.Services.AddRefitClient<ICatalogRefitService>().ConfigureHttpClient(configure =>
 {
     var microserviceOption = builder.Configuration.GetSection(nameof(MicroserviceOption)).Get<MicroserviceOption>();
     configure.BaseAddress = new Uri(microserviceOption!.Catalog.BaseAddress);
 }).AddHttpMessageHandler<AuthenticatedHttpClientHandler>()
   .AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
+
+builder.Services.AddScoped<AuthenticatedHttpClientHandler>();
+builder.Services.AddScoped<ClientAuthenticatedHttpClientHandler>();
 
 builder.Services.AddAuthentication(configureOptions =>
 {

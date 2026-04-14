@@ -10,6 +10,7 @@ public class AuthenticatedHttpClientHandler(IHttpContextAccessor httpContextAcce
 {
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
+        
         if (httpContextAccessor.HttpContext is null)
             return await base.SendAsync(request, cancellationToken);
 

@@ -14,7 +14,6 @@ public static class CategoryEndpointExt
             .WithTags("Categories")
             .CreateCategoryGroupItemEndpoint()
             .GetAllCategoriesGroupItemEndpoint()
-            .GetByIdCategoryGroupItemEndpoint()
-            .RequireAuthorization();
+            .GetByIdCategoryGroupItemEndpoint();
     }
 }

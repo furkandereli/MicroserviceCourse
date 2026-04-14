@@ -29,8 +29,8 @@ public static class AuthenticationExt
                 ValidateIssuerSigningKey = true,
                 ValidateLifetime = true,
                 ValidateIssuer = true,
-                RoleClaimType = "roles",
-                NameClaimType = "preferred_username"
+                RoleClaimType = ClaimTypes.Role,
+                NameClaimType = ClaimTypes.NameIdentifier
             };
 
         }).AddJwtBearer("ClientCredentialSchema", options =>
@@ -50,19 +50,18 @@ public static class AuthenticationExt
 
         services.AddAuthorization(options =>
         {
-            options.AddPolicy("ClientCredential", policy =>
-            {
-                policy.AuthenticationSchemes.Add("ClientCredentialSchema");
-                policy.RequireAuthenticatedUser();
-                policy.RequireClaim("client_id");
-            });
-
             options.AddPolicy("Password", policy =>
             {
                 policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
                 policy.RequireAuthenticatedUser();
                 policy.RequireClaim(ClaimTypes.Email);
             });
+
+            options.AddPolicy("ClientCredential", policy =>
+            {
+                policy.AuthenticationSchemes.Add("ClientCredentialSchema");
+                policy.RequireAuthenticatedUser();
+            });       
         });
 
         return services;
