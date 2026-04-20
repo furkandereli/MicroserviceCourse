@@ -50,6 +50,14 @@ public static class AuthenticationExt
 
         services.AddAuthorization(options =>
         {
+            options.AddPolicy("InstructorPolicy", policy =>
+            {
+                policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+                policy.RequireAuthenticatedUser();
+                policy.RequireClaim(ClaimTypes.Email);
+                policy.RequireRole(ClaimTypes.Role, "instructor");
+            });
+
             options.AddPolicy("Password", policy =>
             {
                 policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
@@ -61,7 +69,7 @@ public static class AuthenticationExt
             {
                 policy.AuthenticationSchemes.Add("ClientCredentialSchema");
                 policy.RequireAuthenticatedUser();
-            });       
+            });
         });
 
         return services;

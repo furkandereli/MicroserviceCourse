@@ -27,7 +27,8 @@ public static class DeleteCourseEndpoint
         group.MapDelete("/{id:guid}", async (Guid Id, IMediator mediator) => 
             (await mediator.Send(new DeleteCourseCommand(Id))).ToGenericResult())
             .MapToApiVersion(1, 0)
-            .WithName("DeleteCourse");
+            .WithName("DeleteCourse")
+            .RequireAuthorization("InstructorPolicy");
 
         return group;
     }

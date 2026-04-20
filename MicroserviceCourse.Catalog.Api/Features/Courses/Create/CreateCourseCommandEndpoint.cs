@@ -16,7 +16,8 @@ public static class CreateCourseCommandEndpoint
                     .Produces<ProblemDetails>(StatusCodes.Status400BadRequest)
                     .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError)
                     .AddEndpointFilter<ValidationFilter<CreateCourseCommand>>()
-                    .DisableAntiforgery();
+                    .DisableAntiforgery()
+                    .RequireAuthorization("InstructorPolicy");
 
         return group;
     }

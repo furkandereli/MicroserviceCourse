@@ -27,24 +27,25 @@ public class CatalogService(ICatalogRefitService catalogRefitService, ILogger<Ca
     public async Task<ServiceResult> CreateCourseAsync(CreateCourseViewModel model)
     {
         StreamPart? pictureStreamPart = null;
+        await using var stream = model.PictureFormFile?.OpenReadStream();
 
         if (model.PictureFormFile is not null && model.PictureFormFile.Length > 0)
-        {
-            await using var stream = model.PictureFormFile.OpenReadStream();
-            pictureStreamPart = new StreamPart(stream, model.PictureFormFile.FileName, model.PictureFormFile.ContentType);
-        }
+            pictureStreamPart =
+                new StreamPart(stream!, model.PictureFormFile.FileName, model.PictureFormFile.ContentType);
 
-        var response = await catalogRefitService.CreateCourseAsync(model.Name,
-                model.Description,
-                model.Price,
-                pictureStreamPart,
-                model.CategoryId.ToString()!);
+        var response = await catalogRefitService.CreateCourseAsync(
+            model.Name,
+            model.Description,
+            model.Price,
+            pictureStreamPart,
+            model.CategoryId.ToString()!
+        );
 
-        if(!response.IsSuccessStatusCode)
+        if (!response.IsSuccessStatusCode)
         {
             var problemDetails = JsonSerializer.Deserialize<ProblemDetails>(response.Error.Content!);
             logger.LogError("Error occurred while creating course");
-            return ServiceResult.Error("Fail to create course. Please try again later.");
+            return ServiceResult.Error("Fail to create course. Please try again later");
         }
 
         return ServiceResult.Success();
