@@ -1,6 +1,7 @@
 using MicroserviceCourse.Web.Pages.Instructor.ViewModel;
 using MicroserviceCourse.Web.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MicroserviceCourse.Web.Pages.Instructor;
@@ -8,7 +9,7 @@ namespace MicroserviceCourse.Web.Pages.Instructor;
 [Authorize(Roles = "instructor")]
 public class CreateCourseModel(CatalogService catalogService) : PageModel
 {
-    public CreateCourseViewModel ViewModel { get; set; } = CreateCourseViewModel.Empty;
+    [BindProperty] public CreateCourseViewModel ViewModel { get; set; } = CreateCourseViewModel.Empty;
 
     public async Task OnGet()
     {
@@ -19,5 +20,13 @@ public class CreateCourseModel(CatalogService catalogService) : PageModel
         }
 
         ViewModel.SetCategoryDropdownList(categoriesResult.Data!);
+    }
+
+    public async Task<IActionResult> OnPostAsync()
+    {
+        var result = await catalogService.CreateCourseAsync(ViewModel);
+        if (!result.IsSuccess) { }
+
+        return RedirectToPage("Courses");
     }
 }
