@@ -1,8 +1,10 @@
 ﻿using MicroserviceCourse.Bus.Commands;
+using MicroserviceCourse.Shared.Service;
 
 namespace MicroserviceCourse.Catalog.Api.Features.Courses.Create;
 
-public class CreateCourseCommandHandler(AppDbContext context, IMapper mapper, IPublishEndpoint publishEndpoint) : IRequestHandler<CreateCourseCommand, ServiceResult<Guid>>
+public class CreateCourseCommandHandler(AppDbContext context, IMapper mapper, IPublishEndpoint publishEndpoint, IIdentityService identityService
+    ) : IRequestHandler<CreateCourseCommand, ServiceResult<Guid>>
 {
     public async Task<ServiceResult<Guid>> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
     {
@@ -18,6 +20,7 @@ public class CreateCourseCommandHandler(AppDbContext context, IMapper mapper, IP
 
         var newCourse = mapper.Map<Course>(request);
         newCourse.Created = DateTime.Now;
+        newCourse.UserId = identityService.UserId;
         newCourse.Id = NewId.NextSequentialGuid();
 
         newCourse.Feature = new Feature()

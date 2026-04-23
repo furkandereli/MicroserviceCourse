@@ -17,9 +17,10 @@ builder.Services.AddOptionsExt();
 
 builder.Services.AddHttpClient<SignUpService>();
 builder.Services.AddHttpClient<SignInService>();
-builder.Services.AddHttpClient<TokenService>();
+builder.Services.AddScoped<TokenService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<CatalogService>();
+builder.Services.AddScoped<UserService>();
 
 
 builder.Services.AddRefitClient<ICatalogRefitService>().ConfigureHttpClient(configure =>
@@ -28,9 +29,6 @@ builder.Services.AddRefitClient<ICatalogRefitService>().ConfigureHttpClient(conf
     configure.BaseAddress = new Uri(microserviceOption!.Catalog.BaseAddress);
 }).AddHttpMessageHandler<AuthenticatedHttpClientHandler>()
   .AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
-
-builder.Services.AddScoped<AuthenticatedHttpClientHandler>();
-builder.Services.AddScoped<ClientAuthenticatedHttpClientHandler>();
 
 builder.Services.AddAuthentication(configureOptions =>
 {
@@ -45,6 +43,8 @@ builder.Services.AddAuthentication(configureOptions =>
         options.AccessDeniedPath = "/Auth/AccessDenied";
     });
 
+builder.Services.AddScoped<AuthenticatedHttpClientHandler>();
+builder.Services.AddScoped<ClientAuthenticatedHttpClientHandler>();
 
 var app = builder.Build();
 

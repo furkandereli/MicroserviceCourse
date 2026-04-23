@@ -1,16 +1,13 @@
 ﻿using Duende.IdentityModel.Client;
 using MicroserviceCourse.Web.Options;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using System.IdentityModel.Tokens.Jwt;
-using System.Net.Http;
 using System.Security.Claims;
-using System.Threading;
 
 namespace MicroserviceCourse.Web.Services;
 
-public class TokenService(HttpClient client, IdentityOption identityOption)
+public class TokenService(IHttpClientFactory httpClientFactory, IdentityOption identityOption)
 {
     public List<Claim> ExtractClaims(string accessToken)
     {
@@ -58,6 +55,7 @@ public class TokenService(HttpClient client, IdentityOption identityOption)
             Policy = { RequireHttps = false },
         };
 
+        var client = httpClientFactory.CreateClient("GetTokensByRefreshToken");
         client.BaseAddress = new Uri(identityOption.Address);
         var discoveryResponse = await client.GetDiscoveryDocumentAsync(discoveryRequest);
 
@@ -83,6 +81,7 @@ public class TokenService(HttpClient client, IdentityOption identityOption)
             Policy = { RequireHttps = false },
         };
 
+        var client = httpClientFactory.CreateClient("GetClientAccessToken");
         client.BaseAddress = new Uri(identityOption.Address);
         var discoveryResponse = await client.GetDiscoveryDocumentAsync(discoveryRequest);
 

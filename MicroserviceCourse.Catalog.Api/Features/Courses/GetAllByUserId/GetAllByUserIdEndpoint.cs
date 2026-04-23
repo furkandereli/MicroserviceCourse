@@ -27,7 +27,8 @@ public static class GetAllByUserIdEndpoint
     {
         group.MapGet("/user/{userId:guid}", async (Guid userId, IMediator mediator) => (await mediator.Send(new GetAllByUserIdQuery(userId))).ToGenericResult())
             .MapToApiVersion(1, 0)
-            .WithName("GetAllByUserId");
+            .WithName("GetAllByUserId")
+            .RequireAuthorization("InstructorPolicy");
 
         return group;
     }

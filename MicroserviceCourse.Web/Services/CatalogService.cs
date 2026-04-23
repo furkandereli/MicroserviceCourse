@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace MicroserviceCourse.Web.Services;
 
-public class CatalogService(ICatalogRefitService catalogRefitService, ILogger<CatalogService> logger)
+public class CatalogService(ICatalogRefitService catalogRefitService,UserService userService, ILogger<CatalogService> logger)
 {
     public async Task<ServiceResult<List<CategoryViewModel>>> GetCategoriesAsync()
     {
@@ -49,6 +49,33 @@ public class CatalogService(ICatalogRefitService catalogRefitService, ILogger<Ca
         }
 
         return ServiceResult.Success();
+    }
+
+    public async Task<ServiceResult<List<CourseViewModel>>> GetCoursesByUserId()
+    {
+        var course = await catalogRefitService.GetCoursesByUserId(userService.UserId);
+
+        if (!course.IsSuccessStatusCode)
+        {
+            var problemDetails = JsonSerializer.Deserialize<ProblemDetails>(course.Error.Content!);
+            logger.LogError("Error occurred while fetching courses by user id");
+            return ServiceResult<List<CourseViewModel>>.Error("Failed to retrieve courses. Please try again later.");
+        }
+
+        var courses = course.Content!
+            .Select(c => new CourseViewModel(
+                c.Id,
+                c.Name,
+                c.Description,
+                c.Price,
+                c.ImageUrl,
+                c.Category.Name,
+                c.Feature.Duration,
+                c.Feature.Rating
+            ))
+            .ToList();
+
+        return ServiceResult<List<CourseViewModel>>.Success(courses);
     }
 }
 
