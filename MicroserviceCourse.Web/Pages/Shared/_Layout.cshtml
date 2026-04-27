@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -35,15 +36,26 @@
                                 <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     @User.Identity.Name
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-end">
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+
+                                    @if (User.Claims.Any(x => x is { Type: ClaimTypes.Role, Value: "instructor" }))
+                                    {
+                                        <li>
+                                            <a class="dropdown-item" asp-page="/Instructor/Index">Instructor</a>
+                                        </li>
+                                    }
                                     <li>
-                                        <a class="dropdown-item text-dark" href="/Profile">Profilim</a>
+                                        <a class="dropdown-item" asp-page="/Basket/Index">Basket</a>
                                     </li>
                                     <li>
-                                        <hr class="dropdown-divider" />
+                                        <a class="dropdown-item" asp-page="/Order/History">Order History</a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item text-dark" asp-area="" asp-page="/Auth/SignIn" asp-page-handler="SignOut">Çıkış Yap</a>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-page="/Auth/SignIn" asp-page-handler="SignOut">Sign Out</a>
                                     </li>
                                 </ul>
                             </li>
