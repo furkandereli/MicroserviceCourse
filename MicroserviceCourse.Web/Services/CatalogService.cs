@@ -77,5 +77,18 @@ public class CatalogService(ICatalogRefitService catalogRefitService,UserService
 
         return ServiceResult<List<CourseViewModel>>.Success(courses);
     }
+
+    public async Task<ServiceResult> DeleteAsync(Guid courseId)
+    {
+        var response = await catalogRefitService.DeleteCourseAsync(courseId);
+        if (!response.IsSuccessStatusCode)
+        {
+            var problemDetails = JsonSerializer.Deserialize<ProblemDetails>(response.Error.Content!);
+            logger.LogError("Error occurred while deleting course");
+            return ServiceResult.Error("Failed to delete course. Please try again later.");
+        }
+
+        return ServiceResult.Success();
+    }
 }
 

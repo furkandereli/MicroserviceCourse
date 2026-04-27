@@ -1,17 +1,28 @@
 using MicroserviceCourse.Web.Pages.Instructor.ViewModel;
 using MicroserviceCourse.Web.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MicroserviceCourse.Web.Pages.Instructor
+namespace MicroserviceCourse.Web.Pages.Instructor;
+
+public class CoursesModel(CatalogService catalogService) : PageModel
 {
-    public class CoursesModel(CatalogService catalogService) : PageModel
+    public List<CourseViewModel> CourseViewModels { get; set; } = null!;
+    public async Task OnGetAsync()
     {
-        public List<CourseViewModel> CourseViewModels { get; set; } = null!;
-        public async Task OnGetAsync()
+        var result = await catalogService.GetCoursesByUserId();
+        //if(result.IsFail) {}
+        CourseViewModels = result.Data!;
+    }
+
+    public async Task<IActionResult> OnGetDeleteAsync(Guid id)
+    {
+        var result = await catalogService.DeleteAsync(id);
+        if (result.IsFail)
         {
-            var result = await catalogService.GetCoursesByUserId();
-            //if(result.IsFail) {}
-            CourseViewModels = result.Data!;
+
         }
+
+        return RedirectToPage();
     }
 }
