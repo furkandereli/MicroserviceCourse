@@ -7,7 +7,9 @@ using MicroserviceCourse.Web.Pages.Auth.SignUp;
 using MicroserviceCourse.Web.Services;
 using MicroserviceCourse.Web.Services.Refit;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Localization;
 using Refit;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,6 +51,17 @@ builder.Services.AddAuthentication(configureOptions =>
     });
 
 var app = builder.Build();
+
+var cultureInfo = new CultureInfo("en-GB");
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture(cultureInfo),
+    SupportedCultures = [cultureInfo],
+    SupportedUICultures = [cultureInfo]
+});
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
