@@ -24,6 +24,8 @@ var app = builder.Build();
 
 app.AddPaymentGroupEndpointExt(app.AddVersionSetExt());
 
+app.UseExceptionHandler(x => { });
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

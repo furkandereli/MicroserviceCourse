@@ -39,7 +39,7 @@ public class SignInService(IHttpContextAccessor contextAccessor,IdentityOption i
         };
 
         client.BaseAddress = new Uri(identityOption.Address);
-        var discoveryResponse = await client.GetDiscoveryDocumentAsync();
+        var discoveryResponse = await client.GetDiscoveryDocumentAsync(discoveryRequest);
 
         if (discoveryResponse.IsError)
             throw new Exception($"Discovery document request failed: {discoveryResponse.Error}");
@@ -51,7 +51,8 @@ public class SignInService(IHttpContextAccessor contextAccessor,IdentityOption i
                 ClientId = identityOption.Web.ClientId,
                 ClientSecret = identityOption.Web.ClientSecret,
                 UserName = signInViewModel.Email,
-                Password = signInViewModel.Password
+                Password = signInViewModel.Password,
+                Scope = "offline_access"
             });
 
         return tokenResponse;

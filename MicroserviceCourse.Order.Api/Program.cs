@@ -34,6 +34,8 @@ builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 var app = builder.Build();
 
+app.UseExceptionHandler(x => { });
+
 app.AddOrderGroupEndpointExt(app.AddVersionSetExt());
 
 // Configure the HTTP request pipeline.

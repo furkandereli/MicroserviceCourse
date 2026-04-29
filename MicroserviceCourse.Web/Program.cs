@@ -1,4 +1,5 @@
 using MicroserviceCourse.Web.DelegateHandlers;
+using MicroserviceCourse.Web.ExceptionHandlers;
 using MicroserviceCourse.Web.Extensions;
 using MicroserviceCourse.Web.Options;
 using MicroserviceCourse.Web.Pages.Auth.SignIn;
@@ -23,6 +24,10 @@ builder.Services.AddScoped<CatalogService>();
 builder.Services.AddScoped<UserService>();
 
 
+builder.Services.AddScoped<AuthenticatedHttpClientHandler>();
+builder.Services.AddScoped<ClientAuthenticatedHttpClientHandler>();
+builder.Services.AddExceptionHandler<UnauthorizedAccessExceptionHandler>();
+
 builder.Services.AddRefitClient<ICatalogRefitService>().ConfigureHttpClient(configure =>
 {
     var microserviceOption = builder.Configuration.GetSection(nameof(MicroserviceOption)).Get<MicroserviceOption>();
@@ -42,9 +47,6 @@ builder.Services.AddAuthentication(configureOptions =>
         options.Cookie.Name = "MicroserviceCourseCookie";
         options.AccessDeniedPath = "/Auth/AccessDenied";
     });
-
-builder.Services.AddScoped<AuthenticatedHttpClientHandler>();
-builder.Services.AddScoped<ClientAuthenticatedHttpClientHandler>();
 
 var app = builder.Build();
 

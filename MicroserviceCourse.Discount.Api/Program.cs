@@ -20,6 +20,8 @@ var app = builder.Build();
 
 app.AddDiscountGroupEndpointExt(app.AddVersionSetExt());
 
+app.UseExceptionHandler(x => { });
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

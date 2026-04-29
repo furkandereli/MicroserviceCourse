@@ -22,6 +22,8 @@ app.AddSeedDataExt().ContinueWith(x =>
     Console.WriteLine(x.IsFaulted ? x.Exception?.Message : "Seed data has been saved successfully");
 });
 
+app.UseExceptionHandler(x => { });
+
 app.AddCategoryGroupEndpointExt(app.AddVersionSetExt());
 app.AddCourseGroupEndpointExt(app.AddVersionSetExt());
 

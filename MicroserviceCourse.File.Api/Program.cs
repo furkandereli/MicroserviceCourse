@@ -17,6 +17,9 @@ builder.Services.AddVersioningExt();
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
 
 var app = builder.Build();
+
+app.UseExceptionHandler(x => { });
+
 app.AddFileGroupEndpointExt(app.AddVersionSetExt());
 
 app.UseStaticFiles();

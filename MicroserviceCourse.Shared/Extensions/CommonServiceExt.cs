@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using MicroserviceCourse.Shared.ExceptionHandlers;
 using MicroserviceCourse.Shared.Service;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,6 +16,7 @@ public static class CommonServiceExt
         services.AddScoped<IIdentityService, IdentityService>();
 
         services.AddAutoMapper(assembly);
+        services.AddExceptionHandler<GlobalExceptionHandler>();
 
         return services;
     }   

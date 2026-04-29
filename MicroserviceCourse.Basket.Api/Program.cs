@@ -26,6 +26,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseExceptionHandler(x => { });
+
 app.AddBasketGroupEndpointExt(app.AddVersionSetExt());
 
 app.UseAuthentication();
