@@ -127,6 +127,47 @@ services:
             RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
         volumes:
           - rabbitmq_data:/var/lib/rabbitmq
+    microservicecourse.basket.api:
+        image: microservicecoursebasketapi
+        build:
+          context: .
+          dockerfile: MicroserviceCourse.Basket.Api/Dockerfile
+    microservicecourse.catalog.api:
+        image: microservicecoursecatalogapi
+        build:
+          context: .
+          dockerfile: MicroserviceCourse.Catalog.Api/Dockerfile
+    microservicecourse.discount.api:
+        image: microservicecoursediscountapi
+        build:
+          context: .
+          dockerfile: MicroserviceCourse.Discount.Api/Dockerfile
+    microservicecourse.file.api:
+        image: microservicecoursefileapi
+        build:
+          context: .
+          dockerfile: MicroserviceCourse.File.Api/Dockerfile
+    microservicecourse.gateway:
+        image: microservicecoursegateway
+        build:
+          context: .
+          dockerfile: MicroserviceCourse.Gateway/Dockerfile
+    microservicecourse.order.api:
+        image: microservicecourseorderapi
+        build:
+          context: .
+          dockerfile: MicroserviceCourse.Order.Api/Dockerfile
+    microservicecourse.payment.api:
+        image: microservicecoursepaymentapi
+        build:
+          context: .
+          dockerfile: MicroserviceCourse.Payment.Api/Dockerfile
+    microservicecourse.web:
+        image: microservicecourseweb
+        build:
+          context: .
+          dockerfile: MicroserviceCourse.Web/Dockerfile
+
 volumes:
     mongo.db.catalog.volume:
     redis.db.basket.volume:    
