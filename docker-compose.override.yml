@@ -3,48 +3,125 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
+      - BusOption:Address=rabbitmq
+      - BusOption:Port=5672
+      - IdentityOption:Address=http://keycloak:8080/realms/UdemyTenant
+      - IdentityOption:Issuer=http://keycloak:8080/realms/UdemyTenant
+      - ConnectionStrings:Redis=redis.db.basket:6379,password=Password12
     ports:
       - "8080"
+    depends_on:
+      - redis.db.basket
+      - rabbitmq
+    restart: always
+
   microservicecourse.catalog.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
+      - BusOption:Address=rabbitmq
+      - BusOption:Port=5672
+      - IdentityOption:Address=http://keycloak:8080/realms/UdemyTenant
+      - IdentityOption:Issuer=http://keycloak:8080/realms/UdemyTenant
+      - MongoOptions:ConnectionString=mongodb://myuser:Password12@mongo.db.catalog:27017
     ports:
       - "8080"
+    depends_on:
+      - mongo.db.catalog
+      - rabbitmq
+    restart: always
+ 
+
   microservicecourse.discount.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
+      - BusOption:Address=rabbitmq
+      - BusOption:Port=5672
+      - IdentityOption:Address=http://keycloak:8080/realms/UdemyTenant
+      - IdentityOption:Issuer=http://keycloak:8080/realms/UdemyTenant
+      - MongoOptions:ConnectionString=mongodb://myuser:Password12@mongo.db.discount:27017
     ports:
       - "8080"
+    depends_on:
+      - mongo.db.discount
+      - rabbitmq
+    restart: always
+ 
+
+
   microservicecourse.file.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
+      - BusOption:Address=rabbitmq
+      - BusOption:Port=5672
+      - IdentityOption:Address=http://keycloak:8080/realms/UdemyTenant
+      - IdentityOption:Issuer=http://keycloak:8080/realms/UdemyTenant
     ports:
       - "8080"
+    restart: always
+    depends_on:
+      - rabbitmq
+
+
   microservicecourse.gateway:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_HTTP_PORTS=8080
+      - IdentityOption:Address=http://keycloak:8080/realms/UdemyTenant
+      - IdentityOption:Issuer=http://keycloak:8080/realms/UdemyTenant
     ports:
       - "8080"
+    restart: always
+
+
   microservicecourse.order.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
+      - BusOption:Address=rabbitmq
+      - BusOption:Port=5672
+      - IdentityOption:Address=http://keycloak:8080/realms/UdemyTenant
+      - IdentityOption:Issuer=http://keycloak:8080/realms/UdemyTenant
+      - AddressUrlOption:PaymentUrl=http://microservicecourse.payment.api:8080
+      - ConnectionStrings:SqlServer=Server=sqlserver.db.order,1433;Database=OrderDockerDb;User=sa;Password=Password12;Trusted_Connection=False;TrustServerCertificate=True;Integrated Security=False
     ports:
       - "8080"
+    depends_on:
+      - sqlserver.db.order
+      - rabbitmq
+    restart: always
+
+
   microservicecourse.payment.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
+      - BusOption:Address=rabbitmq
+      - BusOption:Port=5672
+      - IdentityOption:Address=http://keycloak:8080/realms/UdemyTenant
+      - IdentityOption:Issuer=http://keycloak:8080/realms/UdemyTenant
     ports:
       - "8080"
+    restart: always
+    depends_on:
+      - rabbitmq
+ 
+
   microservicecourse.web:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
+      - MicroserviceOption:Catalog:BaseAddress=http://microservicecourse.catalog.api:8080
+      - MicroserviceOption:File:BaseAddress=http://microservicecourse.file.api:8080
+      - MicroserviceOption:Basket:BaseAddress=http://microservicecourse.basket.api:8080
+      - MicroserviceOption:Discount:BaseAddress=http://microservicecourse.discount.api:8080
+      - MicroserviceOption:Order:BaseAddress=http://microservicecourse.order.api:8080
+      - GatewayOption:BaseAddress=http://microservicecourse.gateway:8080
+      - IdentityOption:Address=http://keycloak:8080/realms/UdemyTenant
+      - IdentityOption:BaseAddress=http://keycloak:8080
     ports:
       - "5050:8080"
 
+    restart: always
